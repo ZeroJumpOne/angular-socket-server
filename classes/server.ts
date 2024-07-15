@@ -8,6 +8,7 @@ import * as socket from '../sockets/sockets';
 export default class Server {
 
     private static _instance: Server;
+    private listClients: [] = [];
 
     public app: express.Application = express();
     public port: number = SERVER_PORT;
@@ -54,16 +55,19 @@ export default class Server {
             // });
 
             //Conectar cliente
-            socket.conectar( client );
+            socket.conectar( client, this.io );
 
             //configurar usuario
-            socket.usuario(client, this.io);
+            socket.configurarUsuario(client, this.io);
+
+            //obtener usuarios
+            socket.obtenerUsuarios(client,this.io);
 
             //Chat
             socket.mensaje(client, this.io);
 
             //Desconectar
-            socket.desconectar(client);
+            socket.desconectar(client, this.io);
         });        
 
 

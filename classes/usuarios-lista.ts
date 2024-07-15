@@ -31,8 +31,8 @@ export default class UsuariosLista {
         console.log(this.lista);
     }
 
-    public getList() {
-        return this.lista;
+    public get list() {
+        return this.lista.filter( usuario => usuario.nombre !== 'sin-nombre');
     }
 
     public getUser( id: string ) {
